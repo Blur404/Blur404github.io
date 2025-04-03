@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="phonebook">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</head>
+<body ng-controller="appController">
+    <h1>Phonebook</h1>
+    
+    <!-- Add new contact form -->
+    <div>
+        <input type="text" ng-model="newName" placeholder="Name">
+        <input type="text" ng-model="newPhone" placeholder="Phone">
+        <input type="text" ng-model="newEmail" placeholder="Email">
+        <button ng-click="addContact()">Add Contact</button>
+    </div>
+
+    <!-- Search field -->
+    <div>
+        <input type="text" ng-model="searchContact" placeholder="Search Contacts">
+    </div>
+
+    <!-- Contact list -->
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        <tr ng-repeat="contact in info | filter:search">
+            <td>[[contact.name]]</td>
+            <td>[[contact.phone]]</td>
+            <td>[[contact.email]]</td>
+            <td><button ng-click="removeContact($index)">Remove</button></td>
+        </tr>
+    </table>
+</body>
+</html>
